@@ -38,9 +38,18 @@ function Router() {
         <Stack.Screen
           name="Add"
           component={AddScreen}
-          options={{title: 'Add To Do'}}
+          options={{title: 'Add New To Do'}}
         />
-        <Stack.Screen name="Update" component={UpdateScreen} />
+        <Stack.Screen
+          name="Update"
+          component={UpdateScreen}
+          options={({navigation, route}) => ({
+            title:
+              route.params.item.title.length > 10
+                ? 'Edit: ' + route.params.item.title.slice(0, 10) + '...'
+                : 'Edit ' + route.params.item.title,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -50,7 +59,7 @@ export default Router;
 
 const styles = StyleSheet.create({
   floatingBtn: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.btn,
     borderRadius: 40,
     width: 40,
     height: 35,

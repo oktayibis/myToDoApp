@@ -28,6 +28,16 @@ const MockData = [
     addDate: '11/01/2020',
     importantLevel: 1,
   },
+  {
+    id: 3,
+    title: 'Long Title Test 3',
+    category: 'Business',
+    description:
+      'amet consectetur adipisicing elitamet consectetur adipisicing elit.',
+    expireDate: '31/08/2020',
+    addDate: '11/09/2020',
+    importantLevel: 2,
+  },
 ];
 
 export default MockData;

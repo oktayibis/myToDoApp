@@ -21,11 +21,11 @@ export default function ToDo({item, navigation}) {
     }
     switch (number) {
       case 0:
-        return '#799351';
+        return '#84a9ac';
       case 1:
-        return '#ffa36c';
+        return '#3b6978';
       case 2:
-        return '#cf1b1b';
+        return '#204051';
 
       default:
         return 'lightgrey';
@@ -57,7 +57,7 @@ export default function ToDo({item, navigation}) {
       margin: 5,
       padding: 15,
       borderRadius: 5,
-      borderColor: colors.textSecondary,
+      borderColor: colors.background,
       borderWidth: 0.5,
     },
     header: {
@@ -65,7 +65,7 @@ export default function ToDo({item, navigation}) {
       justifyContent: 'space-between',
       paddingBottom: 5,
       borderBottomWidth: 0.3,
-      borderBottomColor: colors.textSecondary,
+      borderBottomColor: colors.background,
     },
     title: {
       color: colors.text,
@@ -75,11 +75,11 @@ export default function ToDo({item, navigation}) {
     editBtn: {
       paddingHorizontal: 10,
       paddingVertical: 5,
-      backgroundColor: colors.success,
+      backgroundColor: '#cedebd',
       borderRadius: 10,
     },
     editText: {
-      color: 'white',
+      color: colors.text,
       fontFamily: fonts.regular,
     },
     content: {
@@ -98,12 +98,12 @@ export default function ToDo({item, navigation}) {
       marginTop: 10,
       flexDirection: 'row',
       borderTopWidth: 0.4,
-      borderTopColor: colors.textSecondary,
+      borderTopColor: colors.background,
       paddingTop: 10,
       justifyContent: 'space-between',
     },
     expireDateContainer: {
-      backgroundColor: colors.textSecondary,
+      backgroundColor: colors.background,
       borderRadius: 5,
       padding: 2,
       alignItems: 'center',
@@ -129,7 +129,7 @@ export default function ToDo({item, navigation}) {
     },
     categoryContainer: {
       minWidth: 100,
-      backgroundColor: colors.secondary,
+      backgroundColor: colors.background,
       borderRadius: 5,
       alignItems: 'center',
       justifyContent: 'center',
@@ -155,7 +155,6 @@ export default function ToDo({item, navigation}) {
         <View style={styles.footer}>
           <View style={styles.expireDateContainer}>
             <Text style={styles.expireDateText}>
-              {' '}
               Expire @ {item.expireDate}
             </Text>
           </View>

@@ -1,11 +1,11 @@
 const colors = {
-  background: '#E7E9ED', // Açık Gri
-  primary: '#1C43CF', // Mavi
-  secondary: '#DCDEE4', // Gri
-  success: '#2ED12E', // Yeşil
-  textSecondary: '#C5C5C5', // Gri
+  background: '#e4e3e3', // Açık Gri
+  primary: '#ffa36c', // Mavi
+  secondary: '#f3ecc2', // Gri
+  success: '#99b898', // Yeşil
+  textSecondary: '#14b1ab', // Gri
   text: '#161414', // Siyah
-  btn: '#FB4F63', // Kırmızı
+  btn: '#e8505b', // Kırmızı
 };
 export {colors};
 
