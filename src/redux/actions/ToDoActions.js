@@ -24,7 +24,7 @@ export const getTodoList = () => {
 };
 
 export const updateItemInList = (payload) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({type: UPDATE_TODO, payload});
   };
 };
