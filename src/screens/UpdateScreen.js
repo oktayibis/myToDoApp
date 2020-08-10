@@ -38,7 +38,7 @@ function UpdateScreen(props) {
       }
     }
     props.updateItemInList(payload);
-    Alert.alert('Sucess', 'Your todo added to list', [
+    Alert.alert('Success', 'Your todo updated', [
       {text: 'OK', onPress: () => props.navigation.pop()},
     ]);
   };
@@ -59,7 +59,7 @@ function UpdateScreen(props) {
 
         <ToDoInput
           keyboardType="number-pad"
-          value={toDo.importantLevel.toString()}
+          value={toDo.importantLevel ? toDo.importantLevel.toString() : null}
           label="Level"
           placeholder="e.g: 0-2"
           onChangeText={(text) =>
