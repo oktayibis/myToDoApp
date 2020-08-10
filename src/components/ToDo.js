@@ -11,7 +11,7 @@ import {colors, fonts} from '../themes/themes';
     addDate: '11/01/2020',
     importantLevel: 1,
  */
-export default function ToDo({item, navigation}) {
+export default function ToDo({item, navigation, deleteItem}) {
   const findImportantColor = (number) => {
     if (number > 2) {
       number = 2;
@@ -145,7 +145,9 @@ export default function ToDo({item, navigation}) {
         <View style={styles.header}>
           <Text style={styles.addDate}>Added: {item.addDate}</Text>
           <Text style={styles.title}>{item.title}</Text>
-          <TouchableOpacity style={styles.editBtn}>
+          <TouchableOpacity
+            style={styles.editBtn}
+            onPress={() => deleteItem(item)}>
             <Text style={styles.editText}>Done</Text>
           </TouchableOpacity>
         </View>

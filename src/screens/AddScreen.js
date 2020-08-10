@@ -48,21 +48,12 @@ function AddScreen(props) {
         <Text style={styles.title}> Add New Item</Text>
       </View>
       <View style={styles.containerContent}>
-        <Controller
-          control={control}
-          render={({onChange, onBlur, value}) => (
-            <ToDoInput
-              label="Title"
-              placeholder="e.g: Milk"
-              onChangeText={(text) => setToDo({...toDo, title: text})}
-              value={toDo.title}
-            />
-          )}
-          name="firstName"
-          rules={{required: true}}
-          defaultValue=""
+        <ToDoInput
+          label="Title"
+          placeholder="e.g: Milk"
+          onChangeText={(text) => setToDo({...toDo, title: text})}
+          value={toDo.title}
         />
-        {errors.firstName && <Text>This is required.</Text>}
 
         <ToDoInput
           keyboardType="number-pad"

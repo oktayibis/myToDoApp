@@ -4,14 +4,20 @@ import MockData from '../mock';
 import ToDo from '../components/ToDo';
 import {colors} from '../themes/themes';
 import {connect} from 'react-redux';
-import {getTodoList} from '../redux/actions';
+import {getTodoList, deleteItem} from '../redux/actions';
 
 function HomeScreen(props) {
   React.useEffect(() => {
     props.getTodoList();
   }, []);
   const renderItem = ({item}) => {
-    return <ToDo navigation={props.navigation} item={item} />;
+    return (
+      <ToDo
+        deleteItem={props.deleteItem}
+        navigation={props.navigation}
+        item={item}
+      />
+    );
   };
   return (
     <SafeAreaView style={{backgroundColor: colors.background, flex: 1}}>
@@ -36,4 +42,4 @@ const mapStateToProps = (state) => {
   return {list};
 };
 
-export default connect(mapStateToProps, {getTodoList})(HomeScreen);
+export default connect(mapStateToProps, {getTodoList, deleteItem})(HomeScreen);
