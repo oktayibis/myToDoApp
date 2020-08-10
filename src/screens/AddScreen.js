@@ -65,7 +65,7 @@ function AddScreen(props) {
           keyboardType="number-pad"
           value={toDo.importantLevel}
           label="Level"
-          placeholder="e.g: 0-2"
+          placeholder="e.g: 1-3"
           onChangeText={(text) =>
             setToDo({...toDo, importantLevel: parseInt(text)})
           }

@@ -13,18 +13,18 @@ import {colors, fonts} from '../themes/themes';
  */
 export default function ToDo({item, navigation, deleteItem}) {
   const findImportantColor = (number) => {
-    if (number > 2) {
-      number = 2;
+    if (number > 3) {
+      number = 3;
     }
-    if (number < 0) {
-      number = 0;
+    if (number < 1) {
+      number = 1;
     }
     switch (number) {
-      case 0:
-        return '#84a9ac';
       case 1:
-        return '#3b6978';
+        return '#84a9ac';
       case 2:
+        return '#3b6978';
+      case 3:
         return '#204051';
 
       default:
@@ -32,22 +32,22 @@ export default function ToDo({item, navigation, deleteItem}) {
     }
   };
   const findImportantText = (number) => {
-    if (number > 2) {
-      number = 2;
+    if (number > 3) {
+      number = 3;
     }
-    if (number < 0) {
-      number = 0;
+    if (number < 1) {
+      number = 1;
     }
     switch (number) {
-      case 0:
-        return 'Low';
       case 1:
-        return 'Medium';
+        return 'Low';
       case 2:
+        return 'Medium';
+      case 3:
         return 'High';
 
       default:
-        return 'lightgrey';
+        return 'undefined';
     }
   };
 
@@ -141,7 +141,7 @@ export default function ToDo({item, navigation, deleteItem}) {
   });
 
   const handleDelete = (item) => {
-    Alert.alert('Are you sure?', 'I finshed this to do!', [
+    Alert.alert('Are you sure?', 'I finished this to do!', [
       {
         text: 'OK',
         onPress: () => deleteItem(item),
