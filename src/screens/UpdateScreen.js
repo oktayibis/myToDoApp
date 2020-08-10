@@ -7,8 +7,6 @@ import {
   Alert,
   Platform,
 } from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
-
 import {connect} from 'react-redux';
 import {updateItemInList} from '../redux/actions';
 import DatePicker from 'react-native-datepicker';
@@ -26,7 +24,6 @@ function UpdateScreen(props) {
     importantLevel: props.route.params.item.importantLevel,
     id: props.route.params.item.id,
   });
-  const {control, handleSubmit, errors} = useForm();
 
   const handleAdd = () => {
     let date = new Date();
@@ -35,6 +32,11 @@ function UpdateScreen(props) {
       addDate:
         date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
     };
+    for (const [key, value] of Object.entries(payload)) {
+      if (!value) {
+        return Alert.alert('Error', `Please enter ${key}`);
+      }
+    }
     props.updateItemInList(payload);
     Alert.alert('Sucess', 'Your todo added to list', [
       {text: 'OK', onPress: () => props.navigation.pop()},

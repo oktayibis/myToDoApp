@@ -19,11 +19,12 @@ import {colors, fonts} from '../themes/themes';
 function AddScreen(props) {
   const [toDo, setToDo] = useState({
     title: '',
-    description: '',
+    importantLevel: null,
     category: '',
     expireDate: '',
+    description: '',
+
     addDate: null,
-    importantLevel: 0,
   });
   const {control, handleSubmit, errors} = useForm();
 
@@ -35,6 +36,11 @@ function AddScreen(props) {
       addDate:
         date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
     };
+    for (const [key, value] of Object.entries(payload)) {
+      if (!value) {
+        return Alert.alert('Error', `Please enter ${key}`);
+      }
+    }
     props.addToList(payload);
     Alert.alert('Sucess', 'Your todo added to list', [
       {text: 'OK', onPress: () => props.navigation.pop()},

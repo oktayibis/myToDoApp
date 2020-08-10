@@ -139,6 +139,18 @@ export default function ToDo({item, navigation, deleteItem}) {
       fontFamily: fonts.regular,
     },
   });
+
+  const handleDelete = (item) => {
+    Alert.alert('Are you sure?', 'I finshed this to do!', [
+      {
+        text: 'OK',
+        onPress: () => deleteItem(item),
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Update', {item})}>
       <View style={styles.container}>
@@ -147,8 +159,8 @@ export default function ToDo({item, navigation, deleteItem}) {
           <Text style={styles.title}>{item.title}</Text>
           <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => deleteItem(item)}>
-            <Text style={styles.editText}>Done</Text>
+            onPress={() => handleDelete(item)}>
+            <Text style={styles.editText}>Delete</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.content}>
