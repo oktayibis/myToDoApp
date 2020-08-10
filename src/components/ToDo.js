@@ -140,11 +140,11 @@ export default function ToDo({item, navigation, deleteItem}) {
     },
   });
 
-  const handleDelete = (item) => {
+  const handleDelete = (val) => {
     Alert.alert('Are you sure?', 'I finished this to do!', [
       {
         text: 'OK',
-        onPress: () => deleteItem(item),
+        onPress: () => deleteItem(val),
       },
       {
         text: 'Cancel',

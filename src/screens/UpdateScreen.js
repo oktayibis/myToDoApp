@@ -63,7 +63,7 @@ function UpdateScreen(props) {
           label="Level"
           placeholder="e.g: 0-2"
           onChangeText={(text) =>
-            setToDo({...toDo, importantLevel: parseInt(text)})
+            setToDo({...toDo, importantLevel: parseInt(text, 10)})
           }
         />
         <ToDoInput
@@ -80,6 +80,7 @@ function UpdateScreen(props) {
           <DatePicker
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
+            // eslint-disable-next-line react-native/no-inline-styles
             style={{width: '30%'}}
             date={toDo.expireDate}
             mode="date"
