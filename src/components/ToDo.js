@@ -13,18 +13,18 @@ import {colors, fonts} from '../themes/themes';
  */
 export default function ToDo({item, navigation, deleteItem}) {
   const findImportantColor = (number) => {
-    if (number > 2) {
-      number = 2;
+    if (number > 3) {
+      number = 3;
     }
-    if (number < 0) {
-      number = 0;
+    if (number < 1) {
+      number = 1;
     }
     switch (number) {
-      case 0:
-        return '#84a9ac';
       case 1:
-        return '#3b6978';
+        return '#84a9ac';
       case 2:
+        return '#3b6978';
+      case 3:
         return '#204051';
 
       default:
@@ -32,22 +32,22 @@ export default function ToDo({item, navigation, deleteItem}) {
     }
   };
   const findImportantText = (number) => {
-    if (number > 2) {
-      number = 2;
+    if (number > 3) {
+      number = 3;
     }
-    if (number < 0) {
-      number = 0;
+    if (number < 1) {
+      number = 1;
     }
     switch (number) {
-      case 0:
-        return 'Low';
       case 1:
-        return 'Medium';
+        return 'Low';
       case 2:
+        return 'Medium';
+      case 3:
         return 'High';
 
       default:
-        return 'lightgrey';
+        return 'undefined';
     }
   };
 
@@ -139,6 +139,18 @@ export default function ToDo({item, navigation, deleteItem}) {
       fontFamily: fonts.regular,
     },
   });
+
+  const handleDelete = (val) => {
+    Alert.alert('Are you sure?', 'I finished this to do!', [
+      {
+        text: 'OK',
+        onPress: () => deleteItem(val),
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Update', {item})}>
       <View style={styles.container}>
@@ -147,8 +159,8 @@ export default function ToDo({item, navigation, deleteItem}) {
           <Text style={styles.title}>{item.title}</Text>
           <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => deleteItem(item)}>
-            <Text style={styles.editText}>Done</Text>
+            onPress={() => handleDelete(item)}>
+            <Text style={styles.editText}>Delete</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.content}>

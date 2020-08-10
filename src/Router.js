@@ -1,13 +1,7 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import {
-  View,
-  Text,
-  TouchableHighlight,
-  Dimensions,
-  StyleSheet,
-} from 'react-native';
+import {Text, TouchableHighlight, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
@@ -16,7 +10,6 @@ import UpdateScreen from './screens/UpdateScreen';
 import {fonts, colors} from './themes/themes';
 const Stack = createStackNavigator();
 
-const {width, height} = Dimensions.get('window');
 function Router() {
   return (
     <NavigationContainer>

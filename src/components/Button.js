@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableHighlight, StyleSheet} from 'react-native';
+import {Text, TouchableHighlight, StyleSheet} from 'react-native';
 import {colors, fonts} from '../themes/themes';
 
 export default function Button(props) {

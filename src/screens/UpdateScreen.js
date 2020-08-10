@@ -7,8 +7,6 @@ import {
   Alert,
   Platform,
 } from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
-
 import {connect} from 'react-redux';
 import {updateItemInList} from '../redux/actions';
 import DatePicker from 'react-native-datepicker';
@@ -26,7 +24,6 @@ function UpdateScreen(props) {
     importantLevel: props.route.params.item.importantLevel,
     id: props.route.params.item.id,
   });
-  const {control, handleSubmit, errors} = useForm();
 
   const handleAdd = () => {
     let date = new Date();
@@ -35,8 +32,13 @@ function UpdateScreen(props) {
       addDate:
         date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
     };
+    for (const [key, value] of Object.entries(payload)) {
+      if (!value) {
+        return Alert.alert('Error', `Please enter ${key}`);
+      }
+    }
     props.updateItemInList(payload);
-    Alert.alert('Sucess', 'Your todo added to list', [
+    Alert.alert('Success', 'Your todo updated', [
       {text: 'OK', onPress: () => props.navigation.pop()},
     ]);
   };
@@ -57,11 +59,11 @@ function UpdateScreen(props) {
 
         <ToDoInput
           keyboardType="number-pad"
-          value={toDo.importantLevel.toString()}
+          value={toDo.importantLevel ? toDo.importantLevel.toString() : null}
           label="Level"
           placeholder="e.g: 0-2"
           onChangeText={(text) =>
-            setToDo({...toDo, importantLevel: parseInt(text)})
+            setToDo({...toDo, importantLevel: parseInt(text, 10)})
           }
         />
         <ToDoInput
@@ -78,6 +80,7 @@ function UpdateScreen(props) {
           <DatePicker
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
+            // eslint-disable-next-line react-native/no-inline-styles
             style={{width: '30%'}}
             date={toDo.expireDate}
             mode="date"

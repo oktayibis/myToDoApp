@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, FlatList, View, Text} from 'react-native';
-import MockData from '../mock';
 import ToDo from '../components/ToDo';
 import {colors} from '../themes/themes';
 import {connect} from 'react-redux';
@@ -9,7 +8,7 @@ import {getTodoList, deleteItem} from '../redux/actions';
 function HomeScreen(props) {
   React.useEffect(() => {
     props.getTodoList();
-  }, []);
+  }, [props]);
   const renderItem = ({item}) => {
     return (
       <ToDo
@@ -20,6 +19,7 @@ function HomeScreen(props) {
     );
   };
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <SafeAreaView style={{backgroundColor: colors.background, flex: 1}}>
       <FlatList
         data={props.list}

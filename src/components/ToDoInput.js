@@ -3,7 +3,7 @@ import {View, Text, TextInput, StyleSheet, Dimensions} from 'react-native';
 import {fonts, colors} from '../themes/themes';
 
 export default function ToDoInput(props) {
-  const {width, height} = Dimensions.get('window');
+  const {width} = Dimensions.get('window');
   const styles = StyleSheet.create({
     input: {
       backgroundColor: 'white',
@@ -49,11 +49,3 @@ export default function ToDoInput(props) {
     </View>
   );
 }
-
-/* 
- <TextInput
-        {...props}
-        style={styles.input}
-        placeholder={props.placeholder}
-      />
-*/

@@ -7,7 +7,6 @@ import {
   Alert,
   Platform,
 } from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
 
 import {connect} from 'react-redux';
 import {addToList} from '../redux/actions';
@@ -19,13 +18,13 @@ import {colors, fonts} from '../themes/themes';
 function AddScreen(props) {
   const [toDo, setToDo] = useState({
     title: '',
-    description: '',
+    importantLevel: null,
     category: '',
     expireDate: '',
+    description: '',
+
     addDate: null,
-    importantLevel: 0,
   });
-  const {control, handleSubmit, errors} = useForm();
 
   const handleAdd = () => {
     let date = new Date();
@@ -35,6 +34,11 @@ function AddScreen(props) {
       addDate:
         date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
     };
+    for (const [key, value] of Object.entries(payload)) {
+      if (!value) {
+        return Alert.alert('Error', `Please enter ${key}`);
+      }
+    }
     props.addToList(payload);
     Alert.alert('Sucess', 'Your todo added to list', [
       {text: 'OK', onPress: () => props.navigation.pop()},
@@ -59,9 +63,9 @@ function AddScreen(props) {
           keyboardType="number-pad"
           value={toDo.importantLevel}
           label="Level"
-          placeholder="e.g: 0-2"
+          placeholder="e.g: 1-3"
           onChangeText={(text) =>
-            setToDo({...toDo, importantLevel: parseInt(text)})
+            setToDo({...toDo, importantLevel: parseInt(text, 10)})
           }
         />
         <ToDoInput
@@ -78,6 +82,7 @@ function AddScreen(props) {
           <DatePicker
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
+            // eslint-disable-next-line react-native/no-inline-styles
             style={{width: '30%'}}
             date={toDo.expireDate}
             mode="date"
