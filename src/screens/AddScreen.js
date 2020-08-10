@@ -7,11 +7,16 @@ import {
   Alert,
   Platform,
 } from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
+
+import {connect} from 'react-redux';
+import {addToList} from '../redux/actions';
 import DatePicker from 'react-native-datepicker';
 import ToDoInput from '../components/ToDoInput';
 import Button from '../components/Button';
 import {colors, fonts} from '../themes/themes';
-export default function AddScreen() {
+
+function AddScreen(props) {
   const [toDo, setToDo] = useState({
     title: '',
     description: '',
@@ -20,6 +25,21 @@ export default function AddScreen() {
     addDate: null,
     importantLevel: 0,
   });
+  const {control, handleSubmit, errors} = useForm();
+
+  const handleAdd = () => {
+    let date = new Date();
+    let payload = {
+      ...toDo,
+      id: props.list.length + 1,
+      addDate:
+        date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
+    };
+    props.addToList(payload);
+    Alert.alert('Sucess', 'Your todo added to list', [
+      {text: 'OK', onPress: () => props.navigation.pop()},
+    ]);
+  };
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -28,14 +48,25 @@ export default function AddScreen() {
         <Text style={styles.title}> Add New Item</Text>
       </View>
       <View style={styles.containerContent}>
-        <ToDoInput
-          label="Title"
-          placeholder="e.g: Milk"
-          onChangeText={(text) => setToDo({...toDo, title: text})}
+        <Controller
+          control={control}
+          render={({onChange, onBlur, value}) => (
+            <ToDoInput
+              label="Title"
+              placeholder="e.g: Milk"
+              onChangeText={(text) => setToDo({...toDo, title: text})}
+              value={toDo.title}
+            />
+          )}
+          name="firstName"
+          rules={{required: true}}
+          defaultValue=""
         />
+        {errors.firstName && <Text>This is required.</Text>}
 
         <ToDoInput
           keyboardType="number-pad"
+          value={toDo.importantLevel}
           label="Level"
           placeholder="e.g: 0-2"
           onChangeText={(text) =>
@@ -46,6 +77,7 @@ export default function AddScreen() {
           label="Category"
           placeholder="e.g:Shopping"
           onChangeText={(text) => setToDo({...toDo, category: text})}
+          value={toDo.category}
         />
 
         <View style={styles.inputContainer}>
@@ -77,12 +109,10 @@ export default function AddScreen() {
           label="Detail"
           placeholder="e.g.: Get milk from shop"
           onChangeText={(text) => setToDo({...toDo, description: text})}
+          value={toDo.description}
         />
         <View style={styles.btn}>
-          <Button
-            title="+ Add"
-            onPress={() => Alert.alert(toDo.importantLevel)}
-          />
+          <Button title="+ Add" onPress={handleAdd} />
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -134,54 +164,9 @@ const styles = StyleSheet.create({
   },
 });
 
-/*
-   <View style={styles.inputContainer}>
-        <Text style={styles.inputText}>Add Title</Text>
-        <TextInput style={styles.input} placeholder="Buy Milk.." />
-      </View>
+const mapStateToProps = (state) => {
+  const {list} = state.listResponse;
+  return {list};
+};
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputText}>Expire @</Text>
-        <DatePicker
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          style={{width: '30%'}}
-          date={toDo.expireDate}
-          mode="date"
-          onDateChange={(date) => setToDo({...toDo, expireDate: date})}
-          format="DD-MM-YYYY"
-          showIcon={false}
-          placeholder="Select date"
-          customStyles={{
-            dateInput: {
-              height: 30,
-              padding: 0,
-              marginLeft: 20,
-              borderRadius: 10,
-              borderWidth: 0,
-            },
-          }}
-        />
-      </View>
-      <View style={styles.footer}>
-        <View style={[styles.inputContainer]}>
-          <View>
-            <Text style={styles.inputText}>Level</Text>
-          </View>
-          <TextInput style={styles.input} placeholder="0-2" />
-        </View>
-
-        <View style={[styles.inputContainer, styles.footerLevel]}>
-          <View style={styles.label}>
-            <Text style={styles.inputText}>Category</Text>
-          </View>
-          <TextInput style={styles.input} placeholder="Private" />
-        </View>
-      </View>
-      <View style={styles.inputContainer}>
-        <View style={styles.label}>
-          <Text style={styles.inputText}>Add Detail</Text>
-        </View>
-        <TextInput style={styles.input} placeholder="Buy milk from shop.." />
-      </View>
-*/
+export default connect(mapStateToProps, {addToList})(AddScreen);

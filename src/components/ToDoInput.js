@@ -34,6 +34,7 @@ export default function ToDoInput(props) {
       alignItems: 'center',
     },
   });
+
   return (
     <View style={styles.inputContainer}>
       <View style={styles.label}>
@@ -43,7 +44,16 @@ export default function ToDoInput(props) {
         {...props}
         style={styles.input}
         placeholder={props.placeholder}
+        value={props.value}
       />
     </View>
   );
 }
+
+/* 
+ <TextInput
+        {...props}
+        style={styles.input}
+        placeholder={props.placeholder}
+      />
+*/
