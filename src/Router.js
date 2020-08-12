@@ -26,12 +26,16 @@ function Router() {
                 <Text style={styles.btnText}>+</Text>
               </TouchableHighlight>
             ),
+            headerStyle: {backgroundColor: colors.background},
           })}
         />
         <Stack.Screen
           name="Add"
           component={AddScreen}
-          options={{title: 'Add New To Do'}}
+          options={{
+            title: 'Add New To Do',
+            headerStyle: {backgroundColor: colors.background},
+          }}
         />
         <Stack.Screen
           name="Update"
@@ -41,6 +45,7 @@ function Router() {
               route.params.item.title.length > 10
                 ? 'Edit: ' + route.params.item.title.slice(0, 10) + '...'
                 : 'Edit ' + route.params.item.title,
+            headerStyle: {backgroundColor: colors.background},
           })}
         />
       </Stack.Navigator>
@@ -59,6 +64,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 20,
+    shadowColor: 'black',
+    shadowOffset: {width: 5, height: 4},
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
   },
   btnText: {
     fontFamily: fonts.semiBold,
