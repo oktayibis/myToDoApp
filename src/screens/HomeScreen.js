@@ -4,6 +4,8 @@ import ToDo from '../components/ToDo';
 import {colors} from '../themes/themes';
 import {connect} from 'react-redux';
 import {getTodoList, deleteItem} from '../redux/actions';
+import Header from '../components/Header';
+import EmptyScreen from './EmptyScreen';
 
 function HomeScreen(props) {
   React.useEffect(() => {
@@ -25,13 +27,7 @@ function HomeScreen(props) {
         data={props.list}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        ListEmptyComponent={() => {
-          return (
-            <View>
-              <Text>Please add todo</Text>
-            </View>
-          );
-        }}
+        ListEmptyComponent={() => <EmptyScreen />}
       />
     </SafeAreaView>
   );

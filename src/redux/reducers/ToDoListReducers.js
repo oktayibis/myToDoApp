@@ -26,6 +26,7 @@ export default (state = INITIAL_STATE, action) => {
         list: arr,
       };
     case UPDATE_TODO:
+      let test = state
       arr = state.list;
       let index = arr.findIndex((val) => val.id === action.payload.id);
       arr.splice(index, 1, action.payload);

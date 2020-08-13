@@ -59,6 +59,7 @@ export default function ToDo({item, navigation, deleteItem}) {
       borderRadius: 5,
       borderColor: colors.background,
       borderWidth: 0.5,
+      elevation: 3,
     },
     header: {
       flexDirection: 'row',
