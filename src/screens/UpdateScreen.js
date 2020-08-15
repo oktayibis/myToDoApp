@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {updateItemInList} from '../redux/actions';
+import {updateItemInList, deleteItem} from '../redux/actions';
 import DatePicker from 'react-native-datepicker';
 import ToDoInput from '../components/ToDoInput';
 import Button from '../components/Button';
@@ -25,7 +25,7 @@ function UpdateScreen(props) {
     id: props.route.params.item.id,
   });
 
-  const handleAdd = () => {
+  const handleUpdate = () => {
     let date = new Date();
     let payload = {
       ...toDo,
@@ -42,13 +42,25 @@ function UpdateScreen(props) {
       {text: 'OK', onPress: () => props.navigation.pop()},
     ]);
   };
+
+  const handleDelete = (item) => {
+    Alert.alert('Are you sure?', 'I finished this to do!', [
+      {
+        text: 'OK',
+        onPress: () => {
+          props.deleteItem(item);
+          props.navigation.navigate('Home');
+        },
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.header}>
-        <Text style={styles.title}> Update ToDo: {toDo.title}</Text>
-      </View>
       <View style={styles.containerContent}>
         <ToDoInput
           label="Title"
@@ -104,9 +116,19 @@ function UpdateScreen(props) {
           placeholder="e.g.: Get milk from shop"
           onChangeText={(text) => setToDo({...toDo, description: text})}
           value={toDo.description}
+          multiline
         />
-        <View style={styles.btn}>
-          <Button title="&#8593; Update" onPress={handleAdd} />
+        <View style={styles.btnArea}>
+          <View style={styles.btn}>
+            <Button
+              title=" - Delete"
+              delete
+              onPress={() => handleDelete(toDo)}
+            />
+          </View>
+          <View style={styles.btn}>
+            <Button title="+ Update" onPress={handleUpdate} />
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -156,6 +178,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
   },
+  btnArea: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
 });
 
 const mapStateToProps = (state) => {
@@ -163,4 +190,6 @@ const mapStateToProps = (state) => {
   return {list};
 };
 
-export default connect(mapStateToProps, {updateItemInList})(UpdateScreen);
+export default connect(mapStateToProps, {updateItemInList, deleteItem})(
+  UpdateScreen,
+);

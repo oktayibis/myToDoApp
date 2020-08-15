@@ -48,9 +48,6 @@ function AddScreen(props) {
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.header}>
-        <Text style={styles.title}> Add New Item</Text>
-      </View>
       <View style={styles.containerContent}>
         <ToDoInput
           label="Title"
@@ -157,6 +154,7 @@ const styles = StyleSheet.create({
   btn: {
     marginHorizontal: 20,
     marginVertical: 10,
+    alignItems: 'flex-end',
   },
 });
 
